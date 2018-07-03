@@ -12,11 +12,9 @@
 # Note: Base Image name format {image-tag}-{php-version}
 #
 
-ARG PHP_VERSION=5.3
+ARG PHP_VERSION=${PHP_VERSION}
 
-# FROM laradock/php-fpm:2.2-${PHP_VERSION}
-#FROM wwestenbrink/baseimage-ubuntu-12
-FROM helder/php-5.3
+FROM helder/php-${PHP_VERSION}
 
 LABEL maintainer="Mahmoud Zalt <mahmoud@zalt.me>"
 
@@ -55,6 +53,7 @@ RUN docker-php-ext-install pdo_pgsql
 # gd:
 #####################################
 
+# Solve issue with freetype.h not found
 RUN mkdir /usr/include/freetype2/freetype
 RUN ln -s /usr/include/freetype2/freetype.h /usr/include/freetype2/freetype/freetype.h
 
