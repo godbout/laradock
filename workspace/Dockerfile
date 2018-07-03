@@ -14,9 +14,59 @@
 
 ARG PHP_VERSION=${PHP_VERSION}
 
-FROM laradock/workspace:2.2-${PHP_VERSION}
+FROM wwestenbrink/baseimage-ubuntu-12
 
 LABEL maintainer="Mahmoud Zalt <mahmoud@zalt.me>"
+
+RUN DEBIAN_FRONTEND=noninteractive
+RUN locale-gen en_US.UTF-8
+
+ENV LANGUAGE=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+ENV LC_CTYPE=en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV TERM xterm
+
+#
+#--------------------------------------------------------------------------
+# Software's Installation
+#--------------------------------------------------------------------------
+#
+
+# Install "PHP Extentions", "libraries", "Software's"
+RUN apt-get update && \
+    apt-get install -y \
+        php-pear \
+        php5-cli \
+        php5-common \
+        php5-curl \
+        php5-intl \
+        php5-json \
+        php5-mcrypt \
+        php5-mysql \
+        php5-pgsql \
+        php5-sqlite \
+        php5-memcached \
+        php5-gd \
+        php5-dev \
+        pkg-config \
+        libcurl4-openssl-dev \
+        libedit-dev \
+        libssl-dev \
+        libxml2-dev \
+        xz-utils \
+        libsqlite3-dev \
+        sqlite3 \
+        git \
+        curl \
+        vim \
+        nano \
+        postgresql-client \
+    && apt-get clean
+
+# Source the bash
+RUN . ~/.bashrc
+
 
 # Set Environment Variables
 ENV DEBIAN_FRONTEND noninteractive
@@ -92,10 +142,10 @@ RUN sed -i 's/\r//' /root/aliases.sh && \
 
 USER laradock
 
-RUN echo "" >> ~/.bashrc && \
-    echo "# Load Custom Aliases" >> ~/.bashrc && \
-    echo "source ~/aliases.sh" >> ~/.bashrc && \
-	echo "" >> ~/.bashrc
+RUN echo "" >> /home/laradock/.bashrc && \
+    echo "# Load Custom Aliases" >> /home/laradock/.bashrc && \
+    echo "source ~/aliases.sh" >> /home/laradock/.bashrc && \
+	echo "" >> /home/laradock/.bashrc
 
 ###########################################################################
 # Composer:
@@ -128,8 +178,8 @@ RUN if [ ${COMPOSER_REPO_PACKAGIST} ]; then \
 ;fi
 
 # Export composer vendor path
-RUN echo "" >> ~/.bashrc && \
-    echo 'export PATH="~/.composer/vendor/bin:$PATH"' >> ~/.bashrc
+RUN echo "" >> /home/laradock/.bashrc && \
+    echo 'export PATH="~/.composer/vendor/bin:$PATH"' >> /home/laradock/.bashrc
 
 ###########################################################################
 # Non-root user : PHPUnit path
@@ -138,8 +188,8 @@ RUN echo "" >> ~/.bashrc && \
 # add ./vendor/bin to non-root user's bashrc (needed for phpunit)
 USER laradock
 
-RUN echo "" >> ~/.bashrc && \
-    echo 'export PATH="/var/www/vendor/bin:$PATH"' >> ~/.bashrc
+RUN echo "" >> /home/laradock/.bashrc && \
+    echo 'export PATH="/var/www/vendor/bin:$PATH"' >> /home/laradock/.bashrc
 
 ###########################################################################
 # Crontab
@@ -776,7 +826,7 @@ RUN if [ ${INSTALL_PG_CLIENT} = true ]; then \
 USER root
 
 RUN apt-get update -yqq \
-    && apt-get -yqq install nasm 
+    && apt-get -yqq install nasm
 
 ###########################################################################
 # Dusk Dependencies:
