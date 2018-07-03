@@ -4,11 +4,8 @@ services:
   apache2:
     volumes:
       - ums-sync:/var/www:nocopy
-      - ${APACHE_HOST_LOG_PATH}:/var/log/apache2
-      - ${APACHE_SITES_PATH}:/etc/apache2/sites-available
   php-fpm:
     volumes:
-      - ./php-fpm/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
       - ums-sync:/var/www:nocopy
   workspace:
     volumes:
