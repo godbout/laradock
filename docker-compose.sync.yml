@@ -1,8 +1,16 @@
 version: '3'
 
 services:
+  nginx:
+    volumes:
+      - usms-sync:/var/www:nocopy
+  php-fpm:
+    volumes:
+      - usms-sync:/var/www:nocopy
+  workspace:
+    volumes:
+      - usms-sync:/var/www:nocopy
 
 volumes:
-  applications-sync:
-    external:
-      name: "applications-docker-sync"
+  usms-sync:
+    external: true
