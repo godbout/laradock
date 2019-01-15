@@ -1,16 +1,17 @@
 version: '3'
 
-services:
-  nginx:
-    volumes:
-      - peeing-sync:/var/www:nocopy
-  php-fpm:
-    volumes:
-      - peeing-sync:/var/www:nocopy
-  workspace:
-    volumes:
-      - peeing-sync:/var/www:nocopy
+# services:
+#   nginx:
+#     volumes:
+#       - peeing-sync:/var/www:nocopy
+#   php-fpm:
+#     volumes:
+#       - peeing-sync:/var/www:nocopy
+#   workspace:
+#     volumes:
+#       - peeing-sync:/var/www:nocopy
 
 volumes:
   peeing-sync:
     external: true
+
