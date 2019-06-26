@@ -14,9 +14,7 @@
 
 ARG PHP_VERSION=${PHP_VERSION}
 
-FROM helder/php-${PHP_VERSION}
-
-LABEL maintainer="Mahmoud Zalt <mahmoud@zalt.me>"
+FROM devilbox/php-fpm-${PHP_VERSION}:latest
 
 #
 #--------------------------------------------------------------------------
@@ -28,6 +26,9 @@ LABEL maintainer="Mahmoud Zalt <mahmoud@zalt.me>"
 
 # Install "curl", "libmemcached-dev", "libpq-dev", "libjpeg-dev",
 #         "libpng12-dev", "libfreetype6-dev", "libssl-dev", "libmcrypt-dev",
+
+# To correct an issue with old source list
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         curl \
