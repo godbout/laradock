@@ -1,8 +1,16 @@
 version: '3'
 
 services:
+  nginx:
+    volumes:
+      - company-hq-sync:/var/www:nocopy
+  php-fpm:
+    volumes:
+      - company-hq-sync:/var/www:nocopy
+  workspace:
+    volumes:
+      - company-hq-sync:/var/www:nocopy
 
 volumes:
-  applications-sync:
-    external:
-      name: "applications-docker-sync"
+  company-hq-sync:
+    external: true
