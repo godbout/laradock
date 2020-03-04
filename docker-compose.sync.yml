@@ -5,4 +5,4 @@ services:
 volumes:
   applications-sync:
     external:
-      name: "applications-docker-sync"
+      name: "ld-tiki-20.x_sync"
