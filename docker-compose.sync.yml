@@ -1,8 +1,5 @@
 version: '3'
 
-services:
-
 volumes:
-  applications-sync:
-    external:
-      name: "ld-tiki-20.x_sync"
+  ld-tiki-20.x_sync:
+    external: true
