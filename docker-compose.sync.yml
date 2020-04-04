@@ -1,5 +1,5 @@
 version: '3'
 
 volumes:
-  ld-data-privacy_sync:
+  ld-incident-platform_sync:
     external: true
