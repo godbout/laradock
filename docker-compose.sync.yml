@@ -3,14 +3,14 @@ version: '3'
 services:
   nginx:
     volumes:
-      - ld-company-hq_sync:/var/www:nocopy
+      - company-hq_sync:/var/www:nocopy
   php-fpm:
     volumes:
-      - ld-company-hq_sync:/var/www:nocopy
+      - company-hq_sync:/var/www:nocopy
   workspace:
     volumes:
-      - ld-company-hq_sync:/var/www:nocopy
+      - company-hq_sync:/var/www:nocopy
 
 volumes:
-  ld-company-hq_sync:
+  company-hq_sync:
     external: true
