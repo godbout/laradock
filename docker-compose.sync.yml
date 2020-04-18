@@ -1,5 +1,5 @@
 version: '3'
 
 volumes:
-  ld-tiki-18.x_sync:
+  tiki-18.x_sync:
     external: true
