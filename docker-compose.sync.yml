@@ -1,5 +1,5 @@
 version: '3'
 
 volumes:
-  ld-incident-platform_sync:
+  incident-platform_sync:
     external: true
