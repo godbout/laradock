@@ -3,14 +3,14 @@ version: '3'
 services:
   nginx:
     volumes:
-      - writings-hq-sync:/var/www:nocopy
+      - writings-hq_sync:/var/www:nocopy
   php-fpm:
     volumes:
-      - writings-hq-sync:/var/www:nocopy
+      - writings-hq_sync:/var/www:nocopy
   workspace:
     volumes:
-      - writings-hq-sync:/var/www:nocopy
+      - writings-hq_sync:/var/www:nocopy
 
 volumes:
-  writings-hq-sync:
+  writings-hq_sync:
     external: true
