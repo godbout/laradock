@@ -3,14 +3,14 @@ version: '3'
 services:
   apache2:
     volumes:
-      - ums-sync:/var/www:nocopy
+      - tiki-15.x_sync:/var/www:nocopy
   php-fpm:
     volumes:
-      - ums-sync:/var/www:nocopy
+      - tiki-15.x_sync:/var/www:nocopy
   workspace:
     volumes:
-      - ums-sync:/var/www:nocopy
+      - tiki-15.x_sync:/var/www:nocopy
 
 volumes:
-  ums-sync:
+  tiki-15.x_sync:
     external: true
