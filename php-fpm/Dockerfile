@@ -14,7 +14,7 @@
 
 ARG PHP_VERSION=${PHP_VERSION}
 
-FROM devilbox/php-fpm-${PHP_VERSION}:latest
+FROM devilbox/php-fpm:${PHP_VERSION}-work
 
 #
 #--------------------------------------------------------------------------
@@ -541,7 +541,7 @@ RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     rm /var/log/lastlog /var/log/faillog
 
-RUN usermod -u 1000 www-data
+RUN usermod -u 1001 www-data
 
 WORKDIR /var/www
 

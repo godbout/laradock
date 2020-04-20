@@ -14,7 +14,7 @@
 
 ARG PHP_VERSION=${PHP_VERSION}
 
-FROM wwestenbrink/baseimage-ubuntu-12
+FROM phusion/baseimage:0.9.18
 
 LABEL maintainer="Mahmoud Zalt <mahmoud@zalt.me>"
 
@@ -153,13 +153,21 @@ RUN echo "" >> /home/laradock/.bashrc && \
 
 USER root
 
+# Install composer and add its bin to the PATH.
+RUN curl -s http://getcomposer.org/installer | php && \
+    echo "export PATH=${PATH}:/var/www/vendor/bin" >> ~/.bashrc && \
+    mv composer.phar /usr/local/bin/composer
+
 # Add the composer.json
 COPY ./composer.json /home/laradock/.composer/composer.json
+COPY ./composer.json /root/.composer/composer.json
 
 # Make sure that ~/.composer belongs to laradock
 RUN chown -R laradock:laradock /home/laradock/.composer
 
-USER laradock
+# Export composer vendor path
+RUN echo "" >> ~/.bashrc && \
+    echo 'export PATH="$HOME/.composer/vendor/bin:$PATH"' >> ~/.bashrc
 
 # Check if global install need to be ran
 ARG COMPOSER_GLOBAL_INSTALL=false
@@ -169,6 +177,8 @@ RUN if [ ${COMPOSER_GLOBAL_INSTALL} = true ]; then \
     # run the install
     composer global install \
 ;fi
+
+USER laradock
 
 ARG COMPOSER_REPO_PACKAGIST
 ENV COMPOSER_REPO_PACKAGIST ${COMPOSER_REPO_PACKAGIST}
