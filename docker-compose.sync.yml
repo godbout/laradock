@@ -1,5 +1,5 @@
 version: '3'
 
 volumes:
-  tiki-20.x_sync:
+  leasing-tools_sync:
     external: true
