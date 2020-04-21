@@ -14,7 +14,7 @@
 
 ARG PHP_VERSION=${PHP_VERSION}
 
-FROM devilbox/php-fpm:${PHP_VERSION}-work
+FROM devilbox/php-fpm:${PHP_VERSION}.5-work
 
 #
 #--------------------------------------------------------------------------
@@ -156,6 +156,9 @@ COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 RUN sed -i "s/xdebug.remote_autostart=0/xdebug.remote_autostart=1/" /usr/local/etc/php/conf.d/xdebug.ini && \
     sed -i "s/xdebug.remote_enable=0/xdebug.remote_enable=1/" /usr/local/etc/php/conf.d/xdebug.ini && \
     sed -i "s/xdebug.cli_color=0/xdebug.cli_color=1/" /usr/local/etc/php/conf.d/xdebug.ini
+
+# Remove devilbox default Xdebug settings
+RUN sed -i "s/xdebug./; xdebug./" /usr/local/etc/php/conf.d/xxx-devilbox-default-php.ini
 
 ###########################################################################
 # Phpdbg:
