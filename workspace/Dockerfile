@@ -707,6 +707,11 @@ RUN if [ ${INSTALL_NODE} = true ]; then \
 # Add NVM binaries to root's .bashrc
 USER root
 
+# need to install libpng-dev to compile some npm shits
+RUN if [ ${INSTALL_NODE} = true ]; then \
+    apt-get -y install libpng-dev \
+;fi
+
 RUN if [ ${INSTALL_NODE} = true ]; then \
     echo "" >> ~/.bashrc && \
     echo 'export NVM_DIR="/home/laradock/.nvm"' >> ~/.bashrc && \
