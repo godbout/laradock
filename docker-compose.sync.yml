@@ -1,8 +1,5 @@
 version: '3'
 
-services:
-
 volumes:
-  applications-sync:
-    external:
-      name: "applications-docker-sync"
+  tiki-22.x_sync:
+    external: true
